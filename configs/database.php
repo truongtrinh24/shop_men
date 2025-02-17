@@ -3,6 +3,6 @@ $config['database'] = [
   'host' => 'localhost',
   'user' => 'root',
   'pass' => '',
-  'db' => 'shop'
+  'db' => 'shop_men'
 ];
 ?>
