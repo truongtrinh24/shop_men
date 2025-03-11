@@ -1,79 +1,55 @@
-<footer class="footer_section">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-4 footer-col">
-          <div class="footer_contact">
-            <h4>
-              Contact Us
-            </h4>
-            <div class="contact_link_box">
-              <a href="">
-                <i class="fa fa-map-marker" aria-hidden="true"></i>
-                <span>
-                  Location
-                </span>
-              </a>
-              <a href="">
-                <i class="fa fa-phone" aria-hidden="true"></i>
-                <span>
-                  Call +01 1234567890
-                </span>
-              </a>
-              <a href="">
-                <i class="fa fa-envelope" aria-hidden="true"></i>
-                <span>
-                  demo@gmail.com
-                </span>
-              </a>
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-top">
+            <div class="footer-box">
+                <img src="<?php echo _WEB_ROOT; ?>/public/assets/clients/img/logo.png" alt="D" class="footer-logo">
+                <p>Địa chỉ: 29A Nguyễn Gia Trí, phường 25, quận Bình Thạnh, TP. Hồ Chí Minh</p>
+                <p>Số điện thoại: <strong>0936119483</strong></p>
+                <p>Email: <a href="mailto:trinhtruong25303@gmail.com">trinhtruong25303@gmail.com</a></p>
             </div>
-          </div>
-        </div>
-        <div class="col-md-4 footer-col">
-          <div class="footer_detail">
-            <a href="" class="footer-logo">
-              Feane
-            </a>
-            <p>
-              Necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with
-            </p>
-            <div class="footer_social">
-              <a href="">
-                <i class="fa fa-facebook" aria-hidden="true"></i>
-              </a>
-              <a href="">
-                <i class="fa fa-twitter" aria-hidden="true"></i>
-              </a>
-              <a href="">
-                <i class="fa fa-linkedin" aria-hidden="true"></i>
-              </a>
-              <a href="">
-                <i class="fa fa-instagram" aria-hidden="true"></i>
-              </a>
-              <a href="">
-                <i class="fa fa-pinterest" aria-hidden="true"></i>
-              </a>
+
+            <div class="footer-box">
+                <h3>HỆ THỐNG CỬA HÀNG</h3>
+                <ul>
+                    <li>📍 90 Quang Trung, Phường 10, Gò Vấp, TP. HCM</li>
+                    <li>📍 228M Trần Hưng Đạo, An Phú, Cần Thơ</li>
+                </ul>
             </div>
-          </div>
+
+            <div class="footer-box">
+                <h3>HỖ TRỢ KHÁCH HÀNG</h3>
+                <ul>
+                    <li><a href="#">Tìm kiếm</a></li>
+                    <li><a href="#">Chính sách đổi trả</a></li>
+                    <li><a href="#">Chính sách bảo mật</a></li>
+                    <li><a href="#">Điều khoản dịch vụ</a></li>
+                    <li><a href="#">Liên hệ</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-box">
+                <h3>ĐĂNG KÝ NHẬN TIN</h3>
+                <div class="subscribe">
+                    <input type="email" placeholder="Nhập địa chỉ email">
+                    <button>Đăng ký</button>
+                </div>
+                <div class="social-icons">
+                    <a href="#"><img src="<?php echo _WEB_ROOT; ?>/public/assets/clients/img/logoFB.png" alt="Facebook"></a>
+                    <a href="#"><img src="<?php echo _WEB_ROOT; ?>/public/assets/clients/img/logoTT.png" alt="TikTok"></a>
+                </div>
+            </div>
         </div>
-        <div class="col-md-4 footer-col">
-          <h4>
-            Opening Hours
-          </h4>
-          <p>
-            Everyday
-          </p>
-          <p>
-            10.00 Am -10.00 Pm
-          </p>
+
+        <div class="footer-bottom">
+            <div class="payment-icons">
+                <img src="<?php echo _WEB_ROOT; ?>/public/assets/clients/img/thanhtoan.png" alt="Visa">
+            </div>
+            <p>Bản quyền thuộc về VTTQ | Thiết kế bởi công ty 5 sinh viên</p>
         </div>
-      </div>
-      <div class="footer-info">
-        <p>
-          &copy; <span id="displayYear"></span> All Rights Reserved By
-          <a href="https://html.design/">Free Html Templates</a><br><br>
-          &copy; <span id="displayYear"></span> Distributed By
-          <a href="https://themewagon.com/" target="_blank">ThemeWagon</a>
-        </p>
-      </div>
     </div>
-  </footer>
+    
+    <!-- Hộp Chat -->
+    <div class="chat-box">
+        <a href="https://d2shop.vn/collections/hot-deal">Chat với chúng tôi</a>
+    </div>
+</footer>

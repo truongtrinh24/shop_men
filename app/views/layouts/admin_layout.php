@@ -63,7 +63,6 @@
     <script src="<?php echo _WEB_ROOT; ?>/public/assets/admin/js/accountAdmin.js"></script>
     <script src="<?php echo _WEB_ROOT; ?>/public/assets/admin/js/loadAdmin.js"></script>
     <script src="<?php echo _WEB_ROOT; ?>/public/assets/admin/js/customerAdmin.js"></script>
-
     <script src="<?php echo _WEB_ROOT; ?>/node_modules/toastr/toastr.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 

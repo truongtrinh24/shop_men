@@ -1,193 +1,95 @@
-<div class="hero_area">
-    <div class="bg-box">
-        <img src="<?php echo _WEB_ROOT; ?>/public/assets/clients/img/hero-bg.jpg" alt="">
-    </div>
-    <header class="header_section">
-        <div class="container">
-            <nav class="navbar navbar-expand-lg custom_nav-container ">
-                <a class="navbar-brand" href="index.html">
-                    <span>
-                        Feane
-                    </span>
-                </a>
+<!DOCTYPE html>
+<html lang="vi">
 
-                <button class="navbar-toggler" type="button" data-toggle="collapse"
-                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <span class=""> </span>
-                </button>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Header Menu</title>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav  mx-auto ">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="">Home <span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="<?php echo _WEB_ROOT; ?>/dien-thoai">Menu</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="about.html">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="book.html">Book Table</a>
-                        </li>
+<body>
+
+    <!-- Header chính -->
+    <header>
+        <div class="logo">
+            <img src="<?php echo _WEB_ROOT; ?>/public/assets/clients/img/logo.png" alt="Logo">
+        </div>
+
+        <!-- Menu -->
+        <nav>
+            <ul class="menu">
+                <li><a href="#">SALE</a></li>
+                <li class="dropdown">
+                    <a href="#">ÁO NAM ▼</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Áo sơ mi</a></li>
+                        <li><a href="#">Áo thun</a></li>
+                        <li><a href="#">Áo khoác</a></li>
                     </ul>
-                    <div class="user_option">
-                        <a href="" class="user_link">
-                            <i class="fa fa-user" aria-hidden="true"></i>
-                        </a>
-                        <a class="cart_link" href="#">
-                            <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
-                                xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 456.029 456.029"
-                                style="enable-background:new 0 0 456.029 456.029;" xml:space="preserve">
-                                <g>
-                                    <g>
-                                        <path d="M345.6,338.862c-29.184,0-53.248,23.552-53.248,53.248c0,29.184,23.552,53.248,53.248,53.248
-                   c29.184,0,53.248-23.552,53.248-53.248C398.336,362.926,374.784,338.862,345.6,338.862z" />
-                                    </g>
-                                </g>
-                                <g>
-                                    <g>
-                                        <path d="M439.296,84.91c-1.024,0-2.56-0.512-4.096-0.512H112.64l-5.12-34.304C104.448,27.566,84.992,10.67,61.952,10.67H20.48
-                   C9.216,10.67,0,19.886,0,31.15c0,11.264,9.216,20.48,20.48,20.48h41.472c2.56,0,4.608,2.048,5.12,4.608l31.744,216.064
-                   c4.096,27.136,27.648,47.616,55.296,47.616h212.992c26.624,0,49.664-18.944,55.296-45.056l33.28-166.4
-                   C457.728,97.71,450.56,86.958,439.296,84.91z" />
-                                    </g>
-                                </g>
-                                <g>
-                                    <g>
-                                        <path d="M215.04,389.55c-1.024-28.16-24.576-50.688-52.736-50.688c-29.696,1.536-52.224,26.112-51.2,55.296
-                   c1.024,28.16,24.064,50.688,52.224,50.688h1.024C193.536,443.31,216.576,418.734,215.04,389.55z" />
-                                    </g>
-                                </g>
-                                <g>
-                                </g>
-                                <g>
-                                </g>
-                                <g>
-                                </g>
-                                <g>
-                                </g>
-                                <g>
-                                </g>
-                                <g>
-                                </g>
-                                <g>
-                                </g>
-                                <g>
-                                </g>
-                                <g>
-                                </g>
-                                <g>
-                                </g>
-                                <g>
-                                </g>
-                                <g>
-                                </g>
-                                <g>
-                                </g>
-                                <g>
-                                </g>
-                                <g>
-                                </g>
-                            </svg>
-                        </a>
-                        <form class="form-inline">
-                            <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
-                                <i class="fa fa-search" aria-hidden="true"></i>
-                            </button>
-                        </form>
-                        <a href="" class="order_online">
-                            Order Online
-                        </a>
-                    </div>
-                </div>
-            </nav>
+                </li>
+                <li class="dropdown">
+                    <a href="#">QUẦN NAM ▼</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Quần jeans</a></li>
+                        <li><a href="#">Quần kaki</a></li>
+                        <li><a href="#">Quần short</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">PHỤ KIỆN</a></li>
+                <li><a href="#">ĐỊA CHỈ CỬA HÀNG</a></li>
+                <li class="dropdown">
+                    <a href="#">HỖ TRỢ ▼</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Chính sách đổi trả</a></li>
+                        <li><a href="#">Liên hệ</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">ÁO BA LỖ</a></li>
+            </ul>
+        </nav>
+
+        <!-- Biểu tượng tìm kiếm, tài khoản, giỏ hàng -->
+        <div class="icons">
+            <i class="fas fa-search"></i>
+            <i class="fas fa-user"></i>
+            <i class="fas fa-shopping-bag"><span class="cart-count">0</span></i>
         </div>
     </header>
-    <!-- end header section -->
-    <!-- slider section -->
-    <section class="slider_section ">
-        <div id="customCarousel1" class="carousel slide" data-ride="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <div class="container ">
-                        <div class="row">
-                            <div class="col-md-7 col-lg-6 ">
-                                <div class="detail-box">
-                                    <h1>
-                                        Fast Food Restaurant
-                                    </h1>
-                                    <p>
-                                        Doloremque, itaque aperiam facilis rerum, commodi, temporibus sapiente ad
-                                        mollitia laborum quam quisquam esse error unde. Tempora ex doloremque, labore,
-                                        sunt repellat dolore, iste magni quos nihil ducimus libero ipsam.
-                                    </p>
-                                    <div class="btn-box">
-                                        <a href="" class="btn1">
-                                            Order Now
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item ">
-                    <div class="container ">
-                        <div class="row">
-                            <div class="col-md-7 col-lg-6 ">
-                                <div class="detail-box">
-                                    <h1>
-                                        Fast Food Restaurant
-                                    </h1>
-                                    <p>
-                                        Doloremque, itaque aperiam facilis rerum, commodi, temporibus sapiente ad
-                                        mollitia laborum quam quisquam esse error unde. Tempora ex doloremque, labore,
-                                        sunt repellat dolore, iste magni quos nihil ducimus libero ipsam.
-                                    </p>
-                                    <div class="btn-box">
-                                        <a href="" class="btn1">
-                                            Order Now
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="container ">
-                        <div class="row">
-                            <div class="col-md-7 col-lg-6 ">
-                                <div class="detail-box">
-                                    <h1>
-                                        Fast Food Restaurant
-                                    </h1>
-                                    <p>
-                                        Doloremque, itaque aperiam facilis rerum, commodi, temporibus sapiente ad
-                                        mollitia laborum quam quisquam esse error unde. Tempora ex doloremque, labore,
-                                        sunt repellat dolore, iste magni quos nihil ducimus libero ipsam.
-                                    </p>
-                                    <div class="btn-box">
-                                        <a href="" class="btn1">
-                                            Order Now
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <ol class="carousel-indicators">
-                    <li data-target="#customCarousel1" data-slide-to="0" class="active"></li>
-                    <li data-target="#customCarousel1" data-slide-to="1"></li>
-                    <li data-target="#customCarousel1" data-slide-to="2"></li>
-                </ol>
-            </div>
+    <!-- phần voucher khuyến mãi -->
+    <section class="voucher-section">
+        <div class="voucher-card">
+            <h3>FREESHIP</h3>
+            <p>Miễn phí ship cho đơn hàng từ 350K</p>
+            <p><strong>Mã:</strong> <span class="voucher-code">D2SFREESHIP</span></p>
+            <button class="copy-btn" onclick="copyCode(this)">Sao chép</button>
         </div>
 
+        <div class="voucher-card expired">
+            <h3>GIẢM 5%</h3>
+            <p>Giảm giá 5% cho đơn hàng từ 1TR</p>
+            <p><strong>Mã:</strong> <span class="voucher-code">D2SOMD5</span></p>
+            <p><strong>HSD:</strong> 10/1/2024</p>
+            <div class="expired-label">ĐÃ HẾT HẠN</div>
+        </div>
+
+        <div class="voucher-card expired">
+            <h3>GIẢM 7%</h3>
+            <p>Giảm giá 7% cho đơn hàng từ 1.5TR</p>
+            <p><strong>Mã:</strong> <span class="voucher-code">D2SOMD7</span></p>
+            <p><strong>HSD:</strong> 10/1/2024</p>
+            <div class="expired-label">ĐÃ HẾT HẠN</div>
+        </div>
+
+        <div class="voucher-card expired">
+            <h3>GIẢM 10%</h3>
+            <p>Giảm giá 10% cho đơn hàng từ 2TR</p>
+            <p><strong>Mã:</strong> <span class="voucher-code">D2SOMD10</span></p>
+            <p><strong>HSD:</strong> 10/1/2024</p>
+            <div class="expired-label">ĐÃ HẾT HẠN</div>
+        </div>
     </section>
-</div>    
+
+</body>
+
+</html>

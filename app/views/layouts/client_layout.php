@@ -27,7 +27,8 @@
         <link href="<?php echo _WEB_ROOT; ?>/public/assets/clients/css/bootstrap.min.css" rel="stylesheet">
 
         <!-- Template Stylesheet -->
-        <link href="<?php echo _WEB_ROOT; ?>/public/assets/clients/css/style1.css" rel="stylesheet">
+        <link href="<?php echo _WEB_ROOT; ?>/public/assets/clients/css/style.css" rel="stylesheet">
+
     </head>
     <style>
         .alert-message {

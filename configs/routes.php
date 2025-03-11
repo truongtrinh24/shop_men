@@ -1,6 +1,6 @@
 
 <?php
-$routes['default_controller'] = 'product';
+$routes['default_controller'] = 'home';
 
 // Route clients
 $routes['dang-nhap'] = 'signin/login';
@@ -9,6 +9,7 @@ $routes['gio-hang'] = 'carts/index';
 $routes['don-hang'] = 'order/index';
 $routes['chi-tiet-san-pham'] = 'product/detailProduct';
 $routes['san-pham'] = 'product/detailProduct';
+$routes['about'] = 'about/index';
 
 //phan quyen
 //account

@@ -1,151 +1,94 @@
-(function ($) {
-    "use strict";
+document.addEventListener("DOMContentLoaded", function () {
+    // Giả lập số lượng sản phẩm trong giỏ hàng
+    let cartCount = 0;
+    const cartIcon = document.querySelector(".cart-count");
 
-    // Spinner
-    var spinner = function () {
-        setTimeout(function () {
-            if ($('#spinner').length > 0) {
-                $('#spinner').removeClass('show');
-            }
-        }, 1);
-    };
-    spinner(0);
-
-
-    // Fixed Navbar
-    $(window).scroll(function () {
-        if ($(window).width() < 992) {
-            if ($(this).scrollTop() > 55) {
-                $('.fixed-top').addClass('shadow');
-            } else {
-                $('.fixed-top').removeClass('shadow');
-            }
-        } else {
-            if ($(this).scrollTop() > 55) {
-                $('.fixed-top').addClass('shadow').css('top', -55);
-            } else {
-                $('.fixed-top').removeClass('shadow').css('top', 0);
-            }
-        } 
-    });
-    
-    
-   // Back to top button
-   $(window).scroll(function () {
-    if ($(this).scrollTop() > 300) {
-        $('.back-to-top').fadeIn('slow');
-    } else {
-        $('.back-to-top').fadeOut('slow');
+    // Cập nhật giỏ hàng mỗi khi thêm sản phẩm
+    function updateCartCount() {
+        cartCount++;
+        cartIcon.textContent = cartCount;
     }
+
+    // Gán sự kiện (giả lập thêm sản phẩm)
+    document.querySelector(".fas.fa-shopping-bag").addEventListener("click", function () {
+        updateCartCount();
     });
-    $('.back-to-top').click(function () {
-        $('html, body').animate({scrollTop: 0}, 1500, 'easeInOutExpo');
-        return false;
-    });
-
-
-    // Testimonial carousel
-    $(".testimonial-carousel").owlCarousel({
-        autoplay: true,
-        smartSpeed: 2000,
-        center: false,
-        dots: true,
-        loop: true,
-        margin: 25,
-        nav : true,
-        navText : [
-            '<i class="bi bi-arrow-left"></i>',
-            '<i class="bi bi-arrow-right"></i>'
-        ],
-        responsiveClass: true,
-        responsive: {
-            0:{
-                items:1
-            },
-            576:{
-                items:1
-            },
-            768:{
-                items:1
-            },
-            992:{
-                items:2
-            },
-            1200:{
-                items:2
-            }
-        }
-    });
-
-
-    // vegetable carousel
-    $(".vegetable-carousel").owlCarousel({
-        autoplay: true,
-        smartSpeed: 1500,
-        center: false,
-        dots: true,
-        loop: true,
-        margin: 25,
-        nav : true,
-        navText : [
-            '<i class="bi bi-arrow-left"></i>',
-            '<i class="bi bi-arrow-right"></i>'
-        ],
-        responsiveClass: true,
-        responsive: {
-            0:{
-                items:1
-            },
-            576:{
-                items:1
-            },
-            768:{
-                items:2
-            },
-            992:{
-                items:3
-            },
-            1200:{
-                items:4
-            }
-        }
-    });
-
-
-    // Modal Video
-    $(document).ready(function () {
-        var $videoSrc;
-        $('.btn-play').click(function () {
-            $videoSrc = $(this).data("src");
+    // Sao chép mã giảm giá vào clipboard
+    function copyCode(btn) {
+        const code = btn.previousElementSibling.textContent;
+        navigator.clipboard.writeText(code).then(() => {
+            alert("Đã sao chép mã: " + code);
         });
-        console.log($videoSrc);
+    }
 
-        $('#videoModal').on('shown.bs.modal', function (e) {
-            $("#video").attr('src', $videoSrc + "?autoplay=1&amp;modestbranding=1&amp;showinfo=0");
-        })
+});
+let slideIndex = 0;
+let slides;
+let slideInterval;
 
-        $('#videoModal').on('hide.bs.modal', function (e) {
-            $("#video").attr('src', $videoSrc);
-        })
+function showSlides() {
+    slides = document.querySelectorAll(".slide");
+
+    if (slides.length < 2) return; // Nếu không có đủ 2 slide, dừng
+
+    slides.forEach((slide, index) => {
+        slide.style.opacity = "0";
+        slide.style.zIndex = "0";
     });
 
+    slideIndex++;
+    if (slideIndex > slides.length) {
+        slideIndex = 1;
+    }
 
+    let currentSlide = slides[slideIndex - 1];
+    currentSlide.style.opacity = "1";
+    currentSlide.style.zIndex = "1";
+}
 
-    // Product Quantity
-    $('.quantity button').on('click', function () {
-        var button = $(this);
-        var oldValue = button.parent().parent().find('input').val();
-        if (button.hasClass('btn-plus')) {
-            var newVal = parseFloat(oldValue) + 1;
-        } else {
-            if (oldValue > 0) {
-                var newVal = parseFloat(oldValue) - 1;
-            } else {
-                newVal = 0;
-            }
-        }
-        button.parent().parent().find('input').val(newVal);
+// Khởi động slider
+function startSlider() {
+    slideInterval = setInterval(showSlides, 4000);
+}
+
+// Dừng slider khi hover vào
+function stopSlider() {
+    clearInterval(slideInterval);
+}
+
+// Khi tải trang, chạy slider
+document.addEventListener("DOMContentLoaded", () => {
+    let sliderContainer = document.querySelector(".slider-container");
+
+    if (!sliderContainer) return; // Nếu slider không tồn tại, thoát
+
+    showSlides(); // Hiển thị ảnh đầu tiên
+    startSlider(); // Bắt đầu chạy
+
+    sliderContainer.addEventListener("mouseenter", stopSlider);
+    sliderContainer.addEventListener("mouseleave", startSlider);
+});
+
+// Chuyển ảnh bằng nút prev/next
+function changeSlide(n) {
+    clearInterval(slideInterval); // Dừng auto slide khi click
+
+    slideIndex += n;
+    if (slideIndex > slides.length) {
+        slideIndex = 1;
+    }
+    if (slideIndex < 1) {
+        slideIndex = slides.length;
+    }
+
+    slides.forEach((slide) => {
+        slide.style.opacity = "0";
+        slide.style.zIndex = "0";
     });
 
-})(jQuery);
+    slides[slideIndex - 1].style.opacity = "1";
+    slides[slideIndex - 1].style.zIndex = "1";
+
+    startSlider(); // Chạy lại sau khi click
+}
 
