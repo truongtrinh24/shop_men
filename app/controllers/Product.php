@@ -7,10 +7,10 @@ class Product extends Controller {
     }
 
     public function index() {
-        $categories = $this->model("categories");
-        $dataCategories = $categories->getAllCategories();
+        // $categories = $this->model("categories");
+        // $dataCategories = $categories->getAllCategories();
         $this->data['content'] = 'blocks/clients/product';
-        $this->data['sub_content']['dataCategories'] = $dataCategories;
+        $this->data['sub_content'] = [];
         $this->render('layouts/client_layout', $this->data);
     }
 

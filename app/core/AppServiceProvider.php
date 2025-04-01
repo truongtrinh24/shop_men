@@ -3,15 +3,13 @@ class AppServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        $cart = $this->model("cart");
-        $categories = $this->model("categories");
-        $allCategories = $categories->getAllCategories();
-        if(isset($_SESSION['user_session']['user'])) {
-            $dataCart = $cart->getNumOfProductInTheCartByUserId($_SESSION['user_session']['user']['account_id']);
-            $data['numOfProductInCart'] = $dataCart;
-        }
-        $data['allCategories'] = $allCategories;
-        $data['copyright'] ='Copyright';
+        $model = $this->model('ProductModel');
+
+        // Lấy danh mục cho Áo Nam (id_type = 1)
+        $clothesCategories = $model->getCategoriesByType(1); // id_type cho Áo Nam
+        $pantsCategories = $model->getCategoriesByType(2);
+        $data['clothesCategories'] = $clothesCategories;
+        $data['pantsCategories'] = $pantsCategories;
         View::share($data);
     }
     public function model($model){

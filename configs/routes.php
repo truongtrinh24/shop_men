@@ -10,7 +10,13 @@ $routes['don-hang'] = 'order/index';
 $routes['chi-tiet-san-pham'] = 'product/detailProduct';
 $routes['san-pham'] = 'product/detailProduct';
 $routes['about'] = 'about/index';
-
+$routes['register'] = 'DangkyCtl/index';
+$routes['login'] = 'LoginCtl/index';
+$routes['register/handle'] = 'DangkyCtl/HandleRegister';
+$routes['detail/([0-9]+)'] = 'DetailProduct/detail/$1';
+$routes['product'] = 'Product/index';
+//xử lý đăng xuất
+$routes['logout'] = 'LogoutCtl/index';
 //phan quyen
 //account
 $routes['admin/account'] = 'AccountController';

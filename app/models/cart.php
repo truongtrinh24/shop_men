@@ -1,4 +1,3 @@
-
 <?php
 
 class Cart
@@ -108,9 +107,9 @@ class Cart
     }
 
     public function getJoinDataCartAndProducts() {
-        $sql = 'SELECT  cart.quantity,  cart.cart_id, product.product_id, product.product_price,  product.product_image,  product.product_name
-                FROM  cart JOIN  product ON  cart.product_id =  product.product_id
-                WHERE  cart.account_id = ?';
+        $sql = 'SELECT cart.quantity, cart.id, product.id AS product_id, product.price AS product_price, product.product_image, product.name AS product_name
+                FROM cart JOIN product ON cart.product_id = product.id
+                WHERE cart.account_id = ?';
 
         $stmt = $this->__conn->prepare($sql);
         if (!$stmt) {
@@ -196,17 +195,17 @@ class Cart
         }
     }
 
-    public function addToCart($account_id, $product_id, $quantity) {
-        $sql = 'INSERT INTO cart (account_id, product_id, quantity) VALUES (?,?,?)';
-        $stmt = $this->__conn->prepare($sql);
-        $stmt->bind_param('sii', $account_id, $product_id, $quantity);
-        if ($stmt->execute()) {
-            $stmt->close(); 
-            return true; 
-        }
-        return false;
-        $stmt->close();
-    }
+    // public function addToCart($account_id, $product_id, $quantity) {
+    //     $sql = 'INSERT INTO cart (account_id, product_id, quantity) VALUES (?,?,?)';
+    //     $stmt = $this->__conn->prepare($sql);
+    //     $stmt->bind_param('sii', $account_id, $product_id, $quantity);
+    //     if ($stmt->execute()) {
+    //         $stmt->close(); 
+    //         return true; 
+    //     }
+    //     return false;
+    //     $stmt->close();
+    // }
 
     public function checkQuantityProductById($product_id) {
         $sql = 'select COUNT(*) FROM product_seri WHERE product_id = ?';

@@ -1,0 +1,47 @@
+
+.container-login {
+    max-width: 500px; /* Chiều rộng tối đa của container */
+    margin: 100px auto; /* Căn giữa theo chiều dọc và chiều ngang */
+    padding: 20px; /* Padding cho container */
+    background-color: white; /* Màu nền cho container */
+    border-radius: 8px; /* Bo tròn các góc */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Đổ bóng cho container */
+    background-color: #f8f9fa;
+    height: auto;
+}
+
+h2 {
+    font-weight: bold; /* Đậm tiêu đề */
+}
+
+.btn {
+    padding: 12px 20px; /* Tăng padding cho nút */
+    font-size: 20px; /* Tăng kích thước chữ */
+    border-radius: 5px; /* Bo tròn các góc */
+}
+
+.btn-primary {
+    background-color: #007bff; /* Màu nền cho nút đăng nhập */
+    border: none; /* Xóa viền */
+}
+
+.btn-danger {
+    background-color: #dc3545; /* Màu nền cho nút đăng nhập Google */
+    border: none; /* Xóa viền */
+}
+
+.btn-block {
+    width: 100%; /* Chiều rộng 100% cho nút */
+}
+
+.text-center {
+    text-align: center; /* Căn giữa văn bản */
+}
+
+.mt-5 {
+    margin-top: 3rem; /* Khoảng cách trên */
+}
+
+.mt-2 {
+    margin-top: 0.5rem; /* Khoảng cách trên */
+}
