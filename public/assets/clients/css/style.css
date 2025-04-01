@@ -130,8 +130,8 @@ header {
 .voucher-section {
     display: flex;
     justify-content: center;
-    gap: 20px;
-    padding: 20px;
+    gap: 15px;
+    padding: 15px;
     flex-wrap: wrap;
     padding-bottom: 35px;
 }
@@ -608,3 +608,40 @@ header {
     font-size: 16px;
     font-weight: bold;
   }
+  .user-icon {
+    position: relative;
+    display: inline-block;
+}
+
+.user-icon {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-login {
+    display: none; /* Ẩn dropdown mặc định */
+    position: absolute;
+    background-color: #333; /* Màu nền của dropdown */
+    color: white; /* Màu chữ */
+    min-width: 160px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000; /* Đảm bảo dropdown hiển thị trên các phần tử khác */
+    border-radius: 4px; /* Bo góc cho dropdown */
+    margin-top: 5px; /* Khoảng cách giữa icon và dropdown */
+    left: 50%; /* Đặt dropdown ở giữa */
+    transform: translateX(-50%); /* Căn giữa dropdown */
+    max-height: 200px; /* Giới hạn chiều cao của dropdown */
+    overflow-y: auto; /* Thêm thanh cuộn nếu nội dung vượt quá chiều cao */
+}
+
+.dropdown-login a {
+    color: white; /* Màu chữ */
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    transition: background-color 0.3s; /* Hiệu ứng chuyển màu nền */
+}
+
+.dropdown-login a:hover {
+    background-color: #555; /* Màu nền khi hover */
+}

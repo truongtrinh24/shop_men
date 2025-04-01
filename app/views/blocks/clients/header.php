@@ -13,7 +13,9 @@
     <!-- Header chính -->
     <header>
         <div class="logo">
-            <img src="<?php echo _WEB_ROOT; ?>/public/assets/clients/img/logo.png" alt="Logo">
+            <a href="<?php echo _WEB_ROOT; ?>/">
+                <img src="<?php echo _WEB_ROOT; ?>/public/assets/clients/img/logo.png" alt="Logo">
+            </a>
         </div>
 
         <!-- Menu -->
@@ -23,17 +25,25 @@
                 <li class="dropdown">
                     <a href="#">ÁO NAM ▼</a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Áo sơ mi</a></li>
-                        <li><a href="#">Áo thun</a></li>
-                        <li><a href="#">Áo khoác</a></li>
+                        <?php if (isset($clothesCategories) && is_array($clothesCategories) && count($clothesCategories) > 0): ?>
+                            <?php foreach ($clothesCategories as $category): ?>
+                                <li><a href="#"><?php echo htmlspecialchars($category['name']); ?></a></li>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <li><a href="#">Không có danh mục</a></li> <!-- Thêm thông báo nếu không có danh mục -->
+                        <?php endif; ?>
                     </ul>
                 </li>
                 <li class="dropdown">
                     <a href="#">QUẦN NAM ▼</a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Quần jeans</a></li>
-                        <li><a href="#">Quần kaki</a></li>
-                        <li><a href="#">Quần short</a></li>
+                        <?php if (isset($pantsCategories) && is_array($pantsCategories) && count($pantsCategories) > 0): ?>
+                            <?php foreach ($pantsCategories as $category): ?>
+                                <li><a href="#"><?php echo htmlspecialchars($category['name']); ?></a></li>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <li><a href="#">Không có danh mục</a></li> <!-- Thêm thông báo nếu không có danh mục -->
+                        <?php endif; ?>
                     </ul>
                 </li>
                 <li><a href="#">PHỤ KIỆN</a></li>
@@ -52,44 +62,46 @@
         <!-- Biểu tượng tìm kiếm, tài khoản, giỏ hàng -->
         <div class="icons">
             <i class="fas fa-search"></i>
-            <i class="fas fa-user"></i>
+            <div class="user-icon">
+                <i class="fas fa-user"></i>
+                <div class="dropdown-login">
+                    <?php if (isset($_SESSION['user'])): ?>
+                        <a href="<?php echo _WEB_ROOT; ?>/account">Tài khoản</a>
+                        <a href="<?php echo _WEB_ROOT; ?>/logout">Đăng xuất</a>
+                    <?php else: ?>
+                        <a href="<?php echo _WEB_ROOT; ?>/login">Đăng nhập</a>
+                        <a href="<?php echo _WEB_ROOT; ?>/register">Đăng ký</a>
+                    <?php endif; ?>
+                </div>
+            </div>
             <i class="fas fa-shopping-bag"><span class="cart-count">0</span></i>
         </div>
     </header>
-    <!-- phần voucher khuyến mãi -->
-    <section class="voucher-section">
-        <div class="voucher-card">
-            <h3>FREESHIP</h3>
-            <p>Miễn phí ship cho đơn hàng từ 350K</p>
-            <p><strong>Mã:</strong> <span class="voucher-code">D2SFREESHIP</span></p>
-            <button class="copy-btn" onclick="copyCode(this)">Sao chép</button>
-        </div>
+    <script>
+        const userIcon = document.querySelector('.user-icon');
+        const dropdown = document.querySelector('.dropdown-login');
 
-        <div class="voucher-card expired">
-            <h3>GIẢM 5%</h3>
-            <p>Giảm giá 5% cho đơn hàng từ 1TR</p>
-            <p><strong>Mã:</strong> <span class="voucher-code">D2SOMD5</span></p>
-            <p><strong>HSD:</strong> 10/1/2024</p>
-            <div class="expired-label">ĐÃ HẾT HẠN</div>
-        </div>
+        userIcon.addEventListener('mouseenter', function () {
+            dropdown.style.display = 'block';
+        });
 
-        <div class="voucher-card expired">
-            <h3>GIẢM 7%</h3>
-            <p>Giảm giá 7% cho đơn hàng từ 1.5TR</p>
-            <p><strong>Mã:</strong> <span class="voucher-code">D2SOMD7</span></p>
-            <p><strong>HSD:</strong> 10/1/2024</p>
-            <div class="expired-label">ĐÃ HẾT HẠN</div>
-        </div>
+        userIcon.addEventListener('mouseleave', function () {
+            // Đặt timeout để cho phép thời gian di chuyển chuột vào dropdown
+            setTimeout(() => {
+                if (!userIcon.matches(':hover') && !dropdown.matches(':hover')) {
+                    dropdown.style.display = 'none';
+                }
+            }, 100); // Thay đổi thời gian nếu cần
+        });
 
-        <div class="voucher-card expired">
-            <h3>GIẢM 10%</h3>
-            <p>Giảm giá 10% cho đơn hàng từ 2TR</p>
-            <p><strong>Mã:</strong> <span class="voucher-code">D2SOMD10</span></p>
-            <p><strong>HSD:</strong> 10/1/2024</p>
-            <div class="expired-label">ĐÃ HẾT HẠN</div>
-        </div>
-    </section>
+        dropdown.addEventListener('mouseenter', function () {
+            dropdown.style.display = 'block'; // Giữ dropdown hiển thị khi chuột ở trong
+        });
 
+        dropdown.addEventListener('mouseleave', function () {
+            dropdown.style.display = 'none'; // Ẩn dropdown khi chuột rời khỏi
+        });
+    </script>
 </body>
 
 </html>
