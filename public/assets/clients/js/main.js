@@ -92,3 +92,59 @@ function changeSlide(n) {
     startSlider(); // Chạy lại sau khi click
 }
 
+document.addEventListener('DOMContentLoaded', function () {
+    console.log("alo");
+    const searchInput = document.querySelector('#search-input');
+    const searchResults = document.querySelector('#search-results');
+
+    searchInput.addEventListener('input', function () {
+        const keyword = this.value.trim();
+        if (keyword.length > 0) {
+            // Gửi yêu cầu AJAX
+            fetch(`<?php echo _WEB_ROOT; ?>/search?keyword=${encodeURIComponent(keyword)}`)
+                .then(response => response.json())
+                .then(data => {
+                    // Xử lý kết quả tìm kiếm
+                    if (data.length > 0) {
+                        let html = '';
+                        data.forEach(product => {
+                            // Tạo đường dẫn hình ảnh từ image_folder và product_image
+                            const imagePath = product.image_folder && product.product_image 
+                                ? `<?php echo _WEB_ROOT; ?>/public/assets/clients/img/${product.image_folder}/${product.product_image}`
+                                : '<?php echo _WEB_ROOT; ?>/public/assets/clients/img/default-product.jpg'; // Hình ảnh mặc định nếu không có
+
+                            html += `
+                                <div class="search-result-item">
+                                    <img src="${imagePath}" alt="${product.name}">
+                                    <div class="search-result-info">
+                                        <p class="product-name">${product.name}</p>
+                                        <p class="price">${new Intl.NumberFormat('vi-VN').format(product.price)}đ</p>
+                                    </div>
+                                </div>
+                            `;
+                        });
+                        searchResults.innerHTML = html;
+                        searchResults.style.display = 'block';
+                    } else {
+                        searchResults.innerHTML = '<p>Không tìm thấy sản phẩm</p>';
+                        searchResults.style.display = 'block';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    searchResults.innerHTML = '<p>Có lỗi xảy ra, vui lòng thử lại</p>';
+                    searchResults.style.display = 'block';
+                });
+        } else {
+            searchResults.style.display = 'none';
+        }
+    });
+
+    // Ẩn kết quả tìm kiếm khi click ra ngoài
+    document.addEventListener('click', function (event) {
+        if (!searchInput.contains(event.target) && !searchResults.contains(event.target)) {
+            searchResults.style.display = 'none';
+        }
+    });
+});
+

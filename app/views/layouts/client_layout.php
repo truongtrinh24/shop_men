@@ -30,12 +30,16 @@
     <link href="<?php echo _WEB_ROOT; ?>/public/assets/clients/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Template Stylesheet -->
-    <link href="<?php echo _WEB_ROOT; ?>/public/assets/clients/css/style.css" rel="stylesheet">
+    <link href="<?php echo _WEB_ROOT; ?>/public/assets/clients/css/style1.css" rel="stylesheet">
     <link href="<?php echo _WEB_ROOT; ?>/public/assets/clients/css/cart.css" rel="stylesheet">
-    <link href="<?php echo _WEB_ROOT; ?>/public/assets/clients/css/register1.css" rel="stylesheet">
+    <link href="<?php echo _WEB_ROOT; ?>/public/assets/clients/css/register.css" rel="stylesheet">
     <link href="<?php echo _WEB_ROOT; ?>/public/assets/clients/css/login.css" rel="stylesheet">
     <link href="<?php echo _WEB_ROOT; ?>/public/assets/clients/css/detailproduct1.css" rel="stylesheet">
     <link href="<?php echo _WEB_ROOT; ?>/public/assets/clients/css/product.css" rel="stylesheet">
+    <link href="<?php echo _WEB_ROOT; ?>/public/assets/clients/css/user1.css" rel="stylesheet">
+    <link href="<?php echo _WEB_ROOT; ?>/public/assets/clients/css/payment1.css" rel="stylesheet">
+    <script src="<?php echo _WEB_ROOT; ?>/public/assets/clients/js/product1.js"></script>
+    <script src="<?php echo _WEB_ROOT; ?>/public/assets/clients/js/payment1.js"></script>
 </head>
 <style>
     .alert-message {
@@ -50,15 +54,23 @@
 <body>
 
     <?php
-
-    if (isset($content) && isset($sub_content)) {
-        $this->render('blocks/clients/header', $sub_content);
-        $this->render($content, $sub_content);
-        $this->render('blocks/clients/footer');
+    extract($data);
+    $is_payment_page = (isset($content) && $content === 'blocks/clients/payment'); // Giả sử $content là 'payment' cho trang thanh toán
+    
+    if ($is_payment_page) {
+        // Chỉ render nội dung trang thanh toán, không có header và footer
+        $this->render($content, $data);
     } else {
-        $this->render('blocks/clients/header');
-        $this->render('home/home');
-        $this->render('blocks/clients/footer');
+        // Các trang khác vẫn có header và footer
+        if (isset($content) && isset($sub_content)) {
+            $this->render('blocks/clients/header', $sub_content);
+            $this->render($content, $sub_content);
+            $this->render('blocks/clients/footer');
+        } else {
+            $this->render('blocks/clients/header');
+            $this->render('home/home');
+            $this->render('blocks/clients/footer');
+        }
     }
     ?>
 
@@ -73,11 +85,11 @@
     <script src="<?php echo _WEB_ROOT; ?>/public/assets/clients/lib/owlcarousel/owl.carousel.min.js"></script>
     <!-- Template Javascript -->
     <script src="<?php echo _WEB_ROOT; ?>/public/assets/clients/js/main.js"></script>
-    <script src="<?php echo _WEB_ROOT; ?>/public/assets/clients/js/products.js"></script>
-    <script src="<?php echo _WEB_ROOT; ?>/public/assets/clients/js/cart.js"></script>
-    <script src="<?php echo _WEB_ROOT; ?>/public/assets/clients/js/order.js"></script>
-    <script src="<?php echo _WEB_ROOT; ?>/public/assets/clients/js/detail-product.js"></script>
     <script src="<?php echo _WEB_ROOT; ?>/public/assets/clients/js/product.js"></script>
+    <script src="<?php echo _WEB_ROOT; ?>/public/assets/clients/js/cart1.js"></script>
+    <script src="<?php echo _WEB_ROOT; ?>/public/assets/clients/js/order.js"></script>
+    
+
     <script>
         $(document).ready(function () {
             var currentPage = 1;
@@ -98,80 +110,80 @@
                 getFilteredData();
             });
 
-            function getFilteredData() {
-                var nameQuery = $('#name-search').val();
-                var categories = [];
-                $('.category-checkbox:checked').each(function () {
-                    categories.push($(this).val());
-                });
-                var priceRangeStart = $('#price-range-start').val();
-                var priceRangeEnd = $('#price-range-end').val();
+            // function getFilteredData() {
+            //     var nameQuery = $('#name-search').val();
+            //     var categories = [];
+            //     $('.category-checkbox:checked').each(function () {
+            //         categories.push($(this).val());
+            //     });
+            //     var priceRangeStart = $('#price-range-start').val();
+            //     var priceRangeEnd = $('#price-range-end').val();
 
-                $.ajax({
-                    url: 'http://localhost/shop/product/getFilteredProducts',
-                    type: 'GET',
-                    dataType: 'json',
-                    data: {
-                        name: nameQuery,
-                        categories: categories,
-                        priceRangeStart: priceRangeStart,
-                        priceRangeEnd: priceRangeEnd
-                    },
-                    success: function (response) {
-                        if (response) {
-                            displayProducts(response);
-                        } else {
-                            $('#show-product').html('');
-                            $('#store-pagination').html('');
-                        }
-                    },
-                    error: function (xhr, status, error) {
-                        console.error(xhr.responseText);
-                    }
-                });
-            }
+            //     $.ajax({
+            //         url: 'http://localhost/shop/product/getFilteredProducts',
+            //         type: 'GET',
+            //         dataType: 'json',
+            //         data: {
+            //             name: nameQuery,
+            //             categories: categories,
+            //             priceRangeStart: priceRangeStart,
+            //             priceRangeEnd: priceRangeEnd
+            //         },
+            //         success: function (response) {
+            //             if (response) {
+            //                 displayProducts(response);
+            //             } else {
+            //                 $('#show-product').html('');
+            //                 $('#store-pagination').html('');
+            //             }
+            //         },
+            //         error: function (xhr, status, error) {
+            //             console.error(xhr.responseText);
+            //         }
+            //     });
+            // }
 
-            function displayProducts(products) {
-                var productLength = products.length;
-                var startIndex = currentPage * itemsPerPage - itemsPerPage;
+            // function displayProducts(products) {
+            //     var productLength = products.length;
+            //     var startIndex = currentPage * itemsPerPage - itemsPerPage;
 
-                var endIndex = startIndex + itemsPerPage;
+            //     var endIndex = startIndex + itemsPerPage;
 
-                const currentProducts = products.slice(startIndex, endIndex);
-                $('#show-product').html('');
+            //     const currentProducts = products.slice(startIndex, endIndex);
+            //     $('#show-product').html('');
 
-                currentProducts.forEach(function (product) {
-                    var productHtml = '<div class="col-md-6 col-lg-6 col-xl-4">';
-                    productHtml += '<a href="<?php echo _WEB_ROOT; ?>/san-pham/' + product.product_url + '">';
-                    productHtml += '<div class="rounded position-relative fruite-item" style="cursor: pointer;">';
-                    productHtml += '<div class="fruite-img">';
-                    productHtml += '<img src="public/assets/clients/img/' + product.product_image + '" class="img-fluid w-100 rounded-top" style="width:306px; height:250px"; alt="">';
-                    productHtml += '</div>';
-                    productHtml += '<div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">News</div>';
-                    productHtml += '<div class="p-4 border border-secondary border-top-0 rounded-bottom">';
-                    productHtml += '<h4>' + product.product_name + '</h4>';
+            //     currentProducts.forEach(function (product) {
+            //         var productHtml = '<div class="col-md-6 col-lg-6 col-xl-4">';
+            //         productHtml += '<a href="<?php echo _WEB_ROOT; ?>/san-pham/' + product.product_url + '">';
+            //         productHtml += '<div class="rounded position-relative fruite-item" style="cursor: pointer;">';
+            //         productHtml += '<div class="fruite-img">';
+            //         productHtml += '<img src="public/assets/clients/img/' + product.product_image + '" class="img-fluid w-100 rounded-top" style="width:306px; height:250px"; alt="">';
+            //         productHtml += '</div>';
+            //         productHtml += '<div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">News</div>';
+            //         productHtml += '<div class="p-4 border border-secondary border-top-0 rounded-bottom">';
+            //         productHtml += '<h4>' + product.product_name + '</h4>';
 
-                    // Giới hạn số từ của mô tả sản phẩm
-                    var descriptionWords = product.product_description.split(' ');
-                    var maxWords = 17;
-                    var truncatedDescription = descriptionWords.slice(0, maxWords).join(' ');
-                    productHtml += '<p>' + truncatedDescription + (descriptionWords.length > maxWords ? '...' : '') + '</p>';
+            //         // Giới hạn số từ của mô tả sản phẩm
+            //         var descriptionWords = product.product_description.split(' ');
+            //         var maxWords = 17;
+            //         var truncatedDescription = descriptionWords.slice(0, maxWords).join(' ');
+            //         productHtml += '<p>' + truncatedDescription + (descriptionWords.length > maxWords ? '...' : '') + '</p>';
 
-                    productHtml += '<div class="d-flex justify-content-around align-items-center">';
-                    productHtml += '<p class="text-dark fs-5 fw-bold mb-0">' + product.product_price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }) + '</p>';
-                    productHtml += '<a href="<?php echo _WEB_ROOT; ?>/carts/addToCart/' + product.product_id + '" class="add-to-cart btn border border-secondary rounded-pill px-3 text-primary" data-product-id="' + product.product_id + '"><i class="fa fa-shopping-bag me-2 text-primary"></i> Thêm </a>';
-                    productHtml += '</div>';
-                    productHtml += '</div>';
-                    productHtml += '</div>';
-                    productHtml += '</a>';
-                    productHtml += '</div>';
+            //         productHtml += '<div class="d-flex justify-content-around align-items-center">';
+            //         productHtml += '<p class="text-dark fs-5 fw-bold mb-0">' + product.product_price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }) + '</p>';
+            //         productHtml += '<a href="<?php echo _WEB_ROOT; ?>/carts/addToCart/' + product.product_id + '" class="add-to-cart btn border border-secondary rounded-pill px-3 text-primary" data-product-id="' + product.product_id + '"><i class="fa fa-shopping-bag me-2 text-primary"></i> Thêm </a>';
+            //         productHtml += '</div>';
+            //         productHtml += '</div>';
+            //         productHtml += '</div>';
+            //         productHtml += '</a>';
+            //         productHtml += '</div>';
 
-                    $('#show-product').append(productHtml);
-                });
+            //         $('#show-product').append(productHtml);
+            //     });
 
 
-                displayPagination(productLength);
-            }
+            //     displayPagination(productLength);
+            // }
 
             function displayPagination(productLength) {
                 var totalPages = Math.ceil(productLength / itemsPerPage);

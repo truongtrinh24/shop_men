@@ -1,0 +1,284 @@
+body.checkout-page {
+    padding-top: 0px;
+}
+.container-payment {
+    display: flex;
+    max-width: 1200px;
+    margin: 20px auto;
+    gap: 20px;
+}
+
+.left-section, .right-section {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.left-section {
+    flex: 2;
+}
+
+.right-section {
+    flex: 1;
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+h2 {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+h3 {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.status {
+    color: #888;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+input[type="text"], select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.address-select {
+    display: flex;
+    gap: 10px;
+}
+
+.address-select select {
+    flex: 1;
+}
+
+.shipping-method {
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 4px;
+    text-align: center;
+    color: #888;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.payment-methods {
+    margin-bottom: 20px;
+}
+
+.payment-option {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.payment-option:last-child {
+    border-bottom: none;
+}
+
+.payment-option input[type="radio"] {
+    margin-right: 10px;
+}
+
+.payment-icon {
+    font-size: 16px; /* Giảm kích thước biểu tượng */
+    margin-right: 8px; /* Giảm khoảng cách để cân đối */
+    color: #333;
+    width: 35px;
+    height: 35px;
+}
+
+.payment-option span {
+    font-size: 14px;
+    color: #333;
+}
+
+.complete-order {
+    width: 100%;
+    padding: 15px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.complete-order:hover {
+    background-color: #0056b3;
+}
+
+/* Phần bên phải */
+.order-items .item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.order-items img {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+.item-details p {
+    margin: 0;
+    font-size: 14px;
+}
+
+.price {
+    margin-left: auto;
+    font-size: 14px;
+}
+
+.discount-code {
+    max-width: 350px; /* Chiều rộng giống hình */
+    margin: 20px auto;
+    font-family: Arial, sans-serif;
+    flex-direction: column;
+}
+
+/* Phần nhập mã và nút */
+.discount-input {
+    display: flex; /* Đặt ô nhập và nút trên cùng một hàng */
+    gap: 8px; /* Khoảng cách giữa input và nút */
+    margin-bottom: 8px; /* Khoảng cách với phần bên dưới */
+}
+
+/* Input */
+.discount-input input {
+    flex: 1;
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ddd; /* Viền xám nhạt */
+    border-radius: 4px;
+    outline: none;
+}
+
+/* Nút "Sử dụng" */
+.discount-input button {
+    padding: 8px 16px;
+    font-size: 14px;
+    background-color: #d0d0d0; /* Màu xám giống trong hình */
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.discount-input button:hover {
+    background-color: #c0c0c0; /* Hiệu ứng hover */
+}
+
+/* Liên kết "Xem thêm mã giảm giá" */
+.view-more-discount {
+    display: flex; /* Đảm bảo thẻ a nằm trên một hàng riêng */
+    align-items: center;
+    gap: 5px;
+    font-size: 14px;
+    color: #007bff; /* Màu xanh dương */
+    text-decoration: none;
+    margin-bottom: 10px; /* Khoảng cách với phần bên dưới */
+}
+
+/* Biểu tượng mũi tên */
+.view-more-discount i {
+    font-size: 12px;
+}
+
+.view-more-discount:hover {
+    text-decoration: underline;
+}
+
+/* Container các nút giảm giá */
+.discount-options {
+    display: grid; /* Sử dụng grid để xếp các nút thành 2 cột */
+    grid-template-columns: 1fr 1fr; /* 2 cột đều nhau */
+    gap: 10px; /* Khoảng cách giữa các nút */
+}
+
+/* Các nút giảm giá */
+.discount-options button {
+    padding: 8px;
+    font-size: 14px;
+    background-color: #fff;
+    color: #333;
+    border: 1px solid #ddd; /* Viền xám nhạt */
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+    transition: border-color 0.3s;
+}
+
+.discount-options button:hover {
+    border-color: #007bff; /* Viền đổi màu khi hover */
+}
+
+.order-summary .summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.order-summary .total {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.input_checkout {
+    width: auto;
+}
+/* Thêm vào payment.css */
+.item-image-wrapper {
+    position: relative; /* Để định vị số lượng tương đối với ảnh */
+    display: inline-block; /* Đảm bảo wrapper chỉ chiếm không gian của ảnh */
+}
+
+.item-quantity {
+    position: absolute;
+    top: -5px; /* Đặt số lượng ở góc trên bên phải */
+    right: -5px;
+    background-color: #007bff; /* Màu nền xanh giống trong hình */
+    color: #fff; /* Màu chữ trắng */
+    font-size: 12px;
+    font-weight: bold;
+    width: 20px;
+    height: 20px;
+    line-height: 20px; /* Căn giữa số lượng theo chiều dọc */
+    text-align: center;
+    border-radius: 50%; /* Hình tròn */
+    border: 1px solid #fff; /* Viền trắng để nổi bật */
+}

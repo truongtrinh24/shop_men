@@ -1,0 +1,256 @@
+/* Container chính */
+.container-user {
+    display: flex;
+    min-height: 70vh;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-right: 1px solid #ddd;
+}
+
+.sidebar h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.sidebar p {
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.sidebar ul {
+    list-style: none;
+}
+
+.sidebar ul li {
+    padding: 10px 0;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.sidebar ul li.active {
+    color: #007bff;
+}
+
+.sidebar ul li span {
+    color: #ff0000;
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    padding: 20px;
+    background-color: #e2e2e5;
+}
+
+.main-content h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.main-content p {
+    font-size: 16px; /* Đã sửa từ "Ascendant" thành 16px, vì Ascendant không hợp lệ */
+    margin-bottom: 20px;
+}
+
+.info p {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.info .icon {
+    margin-right: 10px;
+}
+
+.main-content h3 {
+    font-size: 20px;
+    margin: 20px 0 10px;
+}
+
+/* Tabs */
+.tabs {
+    display: flex;
+    position: relative;
+    margin-bottom: 20px;
+    border-bottom: none;
+}
+
+.tabs::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: #666;
+    z-index: 1;
+}
+
+.tab {
+    flex: 1;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    position: relative;
+}
+
+.tab.active {
+    border-bottom: 2px solid #007bff;
+    color: #007bff;
+    z-index: 2;
+}
+
+/* Danh sách đơn hàng */
+.order-list {
+    margin-top: 10px;
+}
+
+.order-row {
+    display: flex;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.order-row span {
+    flex: 1;
+    text-align: center;
+}
+
+.order-row:nth-child(even) {
+    background-color: #f0f0f0;
+}
+
+/* Nút Xem chi tiết */
+.view-details-btn {
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.view-details-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Modal */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 600px;
+    position: relative;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+}
+
+.modal-title {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    border-bottom: 1px solid #000;
+    padding-bottom: 10px;
+    font-weight: bold;
+}
+
+.modal-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.info-left, .info-right {
+    flex: 1;
+}
+
+.info-left p, .info-right p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+.info-left p strong, .info-right p strong {
+    font-weight: bold;
+}
+
+.modal-address {
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.modal-address strong {
+    font-weight: bold;
+}
+
+.modal-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.modal-table th, .modal-table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    font-size: 14px;
+}
+
+.modal-table th {
+    font-weight: bold;
+    text-transform: uppercase;
+    background-color: #f8f9fa;
+}
+
+.modal-table td {
+    text-align: right;
+}
+
+.modal-table td:first-child {
+    text-align: left;
+}
+
+.modal-total {
+    text-align: right;
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 10px;
+}

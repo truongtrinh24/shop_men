@@ -12,7 +12,7 @@ class Home extends Controller
     public function index()
     {
         $categories = $this->model("categories");
-        
+
         if (isset($_SESSION['user']['account_id'])) {
             $account_id = $_SESSION['user']['account_id'];
             $cart = $this->model("cart");
@@ -25,16 +25,32 @@ class Home extends Controller
             $this->data['sub_content']['user_email'] = null;
             $this->data['sub_content']['customer_name'] = null;
         }
-        
+
         // Lấy danh sách danh mục
         $dataCategories = $categories->getAllCategories();
         $this->data['sub_content']['dataCategories'] = $dataCategories;
 
         // Lấy 6 sản phẩm mới nhất
         $latestProducts = $this->productModel->getLatestProducts(6); // Gọi phương thức lấy sản phẩm mới nhất
+        $model = $this->model('ProductModel');
+        $latestShorts = $model->getLatestShorts(3);
+        $this->data['sub_content']['latestShorts'] = $latestShorts;
         $this->data['sub_content']['latestProducts'] = $latestProducts; // Truyền dữ liệu sản phẩm mới nhất
 
         $this->data['content'] = 'home/home'; // Đường dẫn đến view
         $this->render('layouts/client_layout', $this->data); // Render view
+
+        
+    }
+    public function showLatestShorts()
+    {
+        $model = $this->model('ProductModel');
+        $latestShorts = $model->getLatestShorts(3);
+        var_dump($latestShorts); // Lấy 3 sản phẩm quần short mới nhất
+
+        // Truyền dữ liệu vào view
+        $this->data['sub_content']['latestShorts'] = $latestShorts;
+        $this->data['content'] = 'home/home'; // Hoặc tên view tương ứng
+        $this->render('layouts/client_layout', $this->data);
     }
 }

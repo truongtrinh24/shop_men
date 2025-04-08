@@ -83,29 +83,30 @@
     color: #333;
 }
 
-.discount-code {
+.discount-input {
     display: flex;
     gap: 10px;
     margin-bottom: 20px;
 }
 
-.discount-code input {
-    padding: 10px;
+.discount-input input {
+    padding: 10px  20px;
     border: 1px solid #ddd;
     border-radius: 5px;
     flex: 1;
 }
 
-.discount-code button {
+.discount-input button {
     padding: 10px 20px;
     background-color: #007bff;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    margin-bottom: 15px;    
 }
 
-.discount-code button:hover {
+.discount-input button:hover {
     background-color: #0056b3;
 }
 
@@ -113,6 +114,18 @@
     margin-bottom: 20px;
 }
 
+/* Dòng text hiển thị thông tin lựa chọn */
+.selection-info {
+    margin-bottom: 15px;
+}
+
+#selected-info {
+    font-size: 14px;
+    color: #333;
+    font-weight: 500;
+}
+
+/* Màu sắc và kích thước */
 .color-selection, .size-selection {
     margin-bottom: 15px;
 }
@@ -129,28 +142,77 @@
     gap: 10px;
 }
 
-.colors div, .sizes div {
+.color-option, .size-option {
+    position: relative;
+    display: inline-block;
+}
+
+.color-option input, .size-option input {
+    display: none; /* Ẩn input radio */
+}
+
+.color-circle, .size-circle {
+    display: inline-block;
     width: 40px;
     height: 40px;
-    border-radius: 5px;
-    border: 1px solid #ddd;
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    text-align: center;
+    line-height: 40px;
     font-size: 14px;
+    transition: all 0.3s ease;
 }
 
-.colors div {
-    background-color: #000;
+.color-circle {
+    border-radius: 50%; /* Nút màu là hình tròn */
+    border: 1px solid #ddd; /* Viền xám nhạt */
 }
 
-.sizes div {
-    background-color: #fff;
+.size-circle {
+    border-radius: 5px; /* Hình chữ nhật bo góc */
+    background-color: #fff; /* Nền trắng */
+    border: 1px solid #ccc; /* Viền xám nhạt */
 }
 
-.sizes div:hover, .colors div:hover {
-    border: 1px solid #000;
+/* Khi chọn màu */
+.color-option input:checked + .color-circle {
+    position: relative;
+}
+
+.color-option input:checked + .color-circle::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    background-color: #007bff; /* Chấm tròn màu xanh dương */
+    border-radius: 50%;
+}
+
+/* Khi chọn kích thước */
+.size-option input:checked + .size-circle {
+    background-color: #fff; /* Nền trắng */
+    border: 1px solid #ccc; /* Viền xám nhạt */
+    color: #000; /* Màu chữ đen */
+    position: relative;
+}
+
+.size-option input:checked + .size-circle::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    background-color: #007bff; /* Chấm tròn màu xanh dương */
+    border-radius: 50%;
+}
+
+/* Hiệu ứng hover */
+.color-circle:hover, .size-circle:hover {
+    border: 1px solid #007bff; /* Viền xanh dương khi hover */
 }
 
 .addtocart {

@@ -56,21 +56,18 @@
             <?php if (!empty($this->data['sub_content']['latestProducts'])): ?>
                 <?php foreach ($this->data['sub_content']['latestProducts'] as $product): ?>
                     <div class="product-card">
-                        <div class="product-image">
-                            <img src="<?php echo _WEB_ROOT; ?>/public/assets/clients/img/<?php echo $product['product_image']; ?>"
-                                alt="<?php echo htmlspecialchars($product['name']); ?>">
-                            <span class="badge new">New</span>
-                            <div class="product-actions">
-                                <button class="cart-btn">🛒</button>
-                                <a href="<?php echo _WEB_ROOT; ?>/detail/<?php echo $product['id']; ?>"
-                                    class="view-btn">👁️</a>
+                        <a href="<?php echo _WEB_ROOT; ?>/detail/<?php echo $product['id']; ?>" class="product-link">
+                            <!-- Thêm thẻ a bao quanh -->
+                            <div class="product-image">
+                                <img src="<?php echo _WEB_ROOT; ?>/public/assets/clients/img/<?php echo htmlspecialchars($product['image_folder']); ?>/<?php echo htmlspecialchars($product['product_image']); ?>"
+                                    alt="<?php echo htmlspecialchars($product['name']); ?>">
+                                <span class="badge new">New</span>
                             </div>
-                        </div>
-                        <div class="product-info">
-                            <!-- <p class="brand"><?php echo htmlspecialchars($product['brand']); ?></p> -->
-                            <h3 class="product-name"><?php echo htmlspecialchars($product['name']); ?></h3>
-                            <p class="price"><?php echo number_format($product['price'], 0, ',', '.') . '₫'; ?></p>
-                        </div>
+                            <div class="product-info">
+                                <h3 class="product-name"><?php echo htmlspecialchars($product['name']); ?></h3>
+                                <p class="price"><?php echo number_format($product['price'], 0, ',', '.') . '₫'; ?></p>
+                            </div>
+                        </a>
                     </div>
                 <?php endforeach; ?>
             <?php else: ?>
@@ -91,69 +88,26 @@
         </div>
 
         <div class="product-list">
-            <!-- Sản phẩm 1 -->
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="<?php echo _WEB_ROOT; ?>/public/assets/clients/img/product1.png"
-                        alt="Áo khoác bomber phối túi sọc vải dù">
-                    <span class="badge new">New</span>
-                    <div class="product-actions">
-                        <button class="cart-btn">🛒</button>
-                        <button class="view-btn">👁️</button>
+            <?php if (!empty($latestShorts)): ?>
+                <?php foreach ($latestShorts as $short): ?>
+                    <div class="product-card">
+                        <a href="<?php echo _WEB_ROOT; ?>/detail/<?php echo $short['id']; ?>" class="product-link">
+                            <!-- Thêm thẻ a bao quanh -->
+                            <div class="product-image">
+                                <img src="<?php echo _WEB_ROOT; ?>/public/assets/clients/img/<?php echo htmlspecialchars($short['image_folder']); ?>/<?php echo htmlspecialchars($short['product_image']); ?>"
+                                    alt="<?php echo htmlspecialchars($short['name']); ?>">
+                                <span class="badge new">New</span>
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-name"><?php echo htmlspecialchars($short['name']); ?></h3>
+                                <p class="price"><?php echo number_format($short['price'], 0, ',', '.') . '₫'; ?></p>
+                            </div>
+                        </a>
                     </div>
-                </div>
-                <div class="product-info">
-                    <p class="brand">D2 SHOP</p>
-                    <h3 class="product-name">Áo khoác bomber phối túi sọc vải dù</h3>
-                    <p class="price">670,000₫</p>
-                    <div class="color-options">
-                        <span class="color black"></span>
-                        <span class="color white"></span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Sản phẩm 2 -->
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="product2.jpg" alt="Áo khoác cổ đứng phối 2 màu, vải dù">
-                    <span class="badge new">New</span>
-                    <div class="product-actions">
-                        <button class="cart-btn">🛒</button>
-                        <button class="view-btn">👁️</button>
-                    </div>
-                </div>
-                <div class="product-info">
-                    <p class="brand">D2 SHOP</p>
-                    <h3 class="product-name">Áo khoác cổ đứng phối 2 màu, vải dù</h3>
-                    <p class="price">560,000₫</p>
-                    <div class="color-options">
-                        <span class="color black"></span>
-                        <span class="color white"></span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Sản phẩm 3 -->
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="product3.jpg" alt="Áo khoác cổ đứng phối túi hộp, vải nỉ phối dù">
-                    <span class="badge new">New</span>
-                    <div class="product-actions">
-                        <button class="cart-btn">🛒</button>
-                        <button class="view-btn">👁️</button>
-                    </div>
-                </div>
-                <div class="product-info">
-                    <p class="brand">D2 SHOP</p>
-                    <h3 class="product-name">Áo khoác cổ đứng phối túi hộp, vải nỉ phối dù</h3>
-                    <p class="price">580,000₫</p>
-                    <div class="color-options">
-                        <span class="color brown"></span>
-                        <span class="color black"></span>
-                    </div>
-                </div>
-            </div>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p>Không có sản phẩm nào.</p>
+            <?php endif; ?>
         </div>
     </div>
 </section>

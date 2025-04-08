@@ -1,7 +1,4 @@
 <footer class="footer">
-<?php
-                    echo $alo;
-                    ?>
     <div class="footer-container">
         <div class="footer-top">
             <div class="footer-box">
