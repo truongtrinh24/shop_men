@@ -1,6 +1,6 @@
 
 <?php
-class Orders {
+class OrderModel {
     private $conn;
 
     public function __construct() {
@@ -122,4 +122,58 @@ class Orders {
         }
         return true;
     }
+
+    public static function updateStatus($id, $status) {
+        $db = new DB();
+        return $db->table('orders')->where('id', '=', $id)->update(['status' => $status]);
+    }
+    
+    public static function countAll() {
+        global $db_config;
+        $conn = Connection::getInstance($db_config);
+    
+        $sql = "SELECT COUNT(*) AS total FROM orders";
+        $result = $conn->query($sql);
+        $row = $result->fetch_assoc();
+    
+        return $row['total'] ?? 0;
+    }    
+    
+    public static function getConfirmedRevenue() {
+        global $db_config;
+        $conn = Connection::getInstance($db_config);
+    
+        // Lấy tổng tiền đơn hàng đã xác nhận (giả sử 2 = đã xác nhận)
+        $sql = "SELECT SUM(total_price) AS revenue FROM orders WHERE status_order_id = 2";
+        $result = $conn->query($sql);
+    
+        if (!$result) {
+            die("❌ Lỗi truy vấn: " . $conn->error);
+        }
+    
+        $row = $result->fetch_assoc();
+        return $row['revenue'] ?? 0;
+    }    
+    
+    public static function getMonthlyRevenue() {
+        global $db_config;
+        $conn = Connection::getInstance($db_config);
+    
+        $sql = "SELECT DATE_FORMAT(created_at, '%Y-%m') AS month, 
+                       SUM(total_price) AS revenue
+                FROM orders
+                WHERE status_order_id = 2
+                GROUP BY month
+                ORDER BY month ASC
+                LIMIT 12";
+    
+        $result = $conn->query($sql);
+    
+        if (!$result) {
+            die("❌ Lỗi SQL: " . $conn->error); // In lỗi ra màn hình
+        }
+    
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }    
+    
 }

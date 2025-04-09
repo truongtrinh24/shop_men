@@ -20,4 +20,23 @@ class Account {
         }
         return false;
     }
+
+    public static function updateStatus($id, $status) {
+        $db = new DB();
+        return $db->table('account')->where('id', '=', $id)->update(['is_active' => $status]);
+    }
+    
+    public static function countByRole($role_id) {
+        global $db_config;
+$conn = Connection::getInstance($db_config);
+
+$stmt = $conn->prepare("SELECT COUNT(*) AS total FROM account WHERE role_id = ?");
+$stmt->bind_param("i", $role_id);
+$stmt->execute();
+$result = $stmt->get_result();
+$row = $result->fetch_assoc();
+
+return $row['total'] ?? 0;
+    }
+    
 }

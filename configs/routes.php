@@ -26,9 +26,10 @@ $routes['admin/customer'] = 'CustomerController';
 
 
 // Route admin      
-$routes['admin/dashboard'] = 'admin/index';
+$routes['admin/dashboard'] = 'AdminController/index';
+$routes['admin/dashboard'] = 'AdminController/dashboard';
 $routes['admin/product'] = 'Product_Admin/index';
-
+$routes['admin/orders'] = 'AdminController/orders';
 //phan quyen
 $routes['admin/role'] =  'RoleController';
 
@@ -56,5 +57,22 @@ $routes['admin/statistical'] = 'ThongKeController/index';
 // $routes['admin/import'] = 'ImportController';
 
 //customer
+// Admin - sản phẩm
+$routes['admin/products'] = 'AdminController@products';
+$routes['admin/products/create'] = 'AdminController@createProduct';
+$routes['admin/products/store'] = 'AdminController@storeProduct';
+$routes['admin/products/edit/{id}'] = 'AdminController@editProduct';
+$routes['admin/products/update/{id}'] = 'AdminController@updateProduct';
+$routes['admin/products/delete/{id}'] = 'AdminController@deleteProduct';
+$routes['admin/orders/confirm/{id}'] = 'AdminController@confirmOrder';
+$routes['admin/orders/cancel/{id}'] = 'AdminController@cancelOrder';
+$routes['admin/users/lock/{id}'] = 'AdminController@lockUser';
+$routes['admin/users/unlock/{id}'] = 'AdminController@unlockUser';
+$routes['admin/categories'] = 'AdminController@categories';
+$routes['admin/categories/create'] = 'AdminController@createCategory';
+$routes['admin/categories/store'] = 'AdminController@storeCategory';
+$routes['admin/categories/edit/{id}'] = 'AdminController@editCategory';
+$routes['admin/categories/update/{id}'] = 'AdminController@updateCategory';
+$routes['admin/categories/delete/{id}'] = 'AdminController@deleteCategory';
 
 ?>
