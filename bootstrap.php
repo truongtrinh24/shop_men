@@ -20,7 +20,8 @@ $folder = str_replace(strtolower($documentRoot), '', strtolower($dirRoot));
 
 $web_root = $web_root . $folder;
 
-define('_WEB_ROOT', $web_root);
+
+define('_WEB_ROOT', 'http://localhost/shop');
 
 /*
  * Tự động load configs
@@ -54,6 +55,7 @@ require_once 'core/ServiceProvider.php';
 require_once 'core/View.php';
 
 //Load
+
 require_once 'core/Load.php';
 
 //Middleware

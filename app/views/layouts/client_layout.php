@@ -30,7 +30,7 @@
     <link href="<?php echo _WEB_ROOT; ?>/public/assets/clients/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Template Stylesheet -->
-    <link href="<?php echo _WEB_ROOT; ?>/public/assets/clients/css/style1.css" rel="stylesheet">
+    <link href="<?php echo _WEB_ROOT; ?>/public/assets/clients/css/style113.css" rel="stylesheet">
     <link href="<?php echo _WEB_ROOT; ?>/public/assets/clients/css/cart.css" rel="stylesheet">
     <link href="<?php echo _WEB_ROOT; ?>/public/assets/clients/css/register.css" rel="stylesheet">
     <link href="<?php echo _WEB_ROOT; ?>/public/assets/clients/css/login.css" rel="stylesheet">

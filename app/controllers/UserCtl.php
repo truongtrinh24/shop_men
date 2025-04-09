@@ -4,7 +4,7 @@ class UserCtl extends Controller
     public function __construct()
     {
     }
-    
+
     public function index()
     {
         $this->data['content'] = 'blocks/clients/user';
@@ -15,18 +15,22 @@ class UserCtl extends Controller
     public function account()
     {
         // Kiểm tra xem người dùng đã đăng nhập chưa
-        if (!isset($_SESSION['user']['account_id'])) {
+        if (!isset($_SESSION['user_session']['user']['account_id'])) {
+            var_dump($_SESSION); // Debug để xem session có gì
             header("Location: /shop/login");
             exit;
         }
-    
-        $model = $this->model('user');
-        $accountId = $_SESSION['user']['account_id'];
 
+
+        $model = $this->model('user');
+        // $accountId = $_SESSION['user']['account_id'];
+        $accountId = $_SESSION['user_session']['user']['account_id'];
         // Lấy thông tin khách hàng
         $customerInfo = $model->getCustomerByAccountId($accountId);
         if (!$customerInfo) {
             echo "Không tìm thấy thông tin khách hàng.";
+            var_dump($accountId); // Debug account_id
+            var_dump($customerInfo); // Debug dữ liệu trả về
             return;
         }
 

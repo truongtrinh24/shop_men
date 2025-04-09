@@ -41,7 +41,8 @@
             <div class="user-icon">
                 <i class="fas fa-user"></i>
                 <div class="dropdown-login">
-                    <?php if (isset($_SESSION['user'])): ?>
+                    <?php if (isset($_SESSION['user_session'])): ?>
+                        
                         <a href="<?php echo _WEB_ROOT; ?>/account">Tài khoản</a>
                         <a href="<?php echo _WEB_ROOT; ?>/logout">Đăng xuất</a>
                     <?php else: ?>

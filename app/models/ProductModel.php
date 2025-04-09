@@ -4,7 +4,6 @@ class ProductModel
     private $__conn;
     private $table = "category";
 
-
     function __construct()
     {
         global $db_config;
@@ -13,13 +12,13 @@ class ProductModel
             throw new Exception("Không thể kết nối đến database!");
         }
     }
+
     public function getAllProducts()
     {
         $query = "SELECT * FROM product";
         $result = $this->__conn->query($query);
         return $result->fetch_all(MYSQLI_ASSOC); // Trả về tất cả sản phẩm
     }
-
 
     // Phương thức lấy 6 sản phẩm mới nhất
     public function getLatestProducts($limit = 6)
@@ -32,28 +31,17 @@ class ProductModel
         $stmt->close();
         return $products;
     }
-    // app/models/ProductModel.php
-
 
     public function getProductById($id)
     {
-        // Sử dụng kết nối đã được thiết lập
         $query = "SELECT * FROM product WHERE id = ?";
         $stmt = $this->__conn->prepare($query);
-
-        // Ràng buộc tham số
         $stmt->bind_param("i", $id);
-
-        // Thực thi truy vấn
         $stmt->execute();
-
-        // Lấy kết quả
         $result = $stmt->get_result();
-
-        // Trả về thông tin sản phẩm
         return $result->fetch_assoc(); // Trả về thông tin sản phẩm
-
     }
+
     public function getProductImages($productId)
     {
         $query = "SELECT image_url FROM product_images WHERE product_id = ?";
@@ -61,9 +49,9 @@ class ProductModel
         $stmt->bind_param("i", $productId);
         $stmt->execute();
         $result = $stmt->get_result();
-
         return $result->fetch_all(MYSQLI_ASSOC); // Trả về tất cả hình ảnh
     }
+
     public function getProductsByPage($page = 1, $perPage = 12)
     {
         $offset = ($page - 1) * $perPage; // Tính vị trí bắt đầu
@@ -85,6 +73,7 @@ class ProductModel
         $row = $result->fetch_assoc();
         return $row['total'];
     }
+
     public function getProductColors($productId)
     {
         $query = "SELECT c.description 
@@ -99,6 +88,7 @@ class ProductModel
         $stmt->close();
         return $colors; // Trả về mảng chứa các màu sắc (description)
     }
+
     public function getProductSizes($productId)
     {
         $query = "SELECT s.description 
@@ -124,7 +114,8 @@ class ProductModel
         $result = $stmt->get_result();
         return $result->fetch_all(MYSQLI_ASSOC); // Trả về 3 sản phẩm quần short mới nhất
     }
-    // tìm kiếm theo tên sản phẩm
+
+    // Tìm kiếm theo tên sản phẩm
     public function searchProducts($keyword)
     {
         $keyword = '%' . $keyword . '%';
@@ -132,7 +123,7 @@ class ProductModel
               FROM product p 
               WHERE p.name LIKE ? 
               LIMIT 5";
-        $stmt = $this->__conn->prepare($query); // Sửa $this->db thành $this->__conn
+        $stmt = $this->__conn->prepare($query);
         $stmt->bind_param('s', $keyword);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -144,7 +135,7 @@ class ProductModel
         return $products;
     }
 
-    // lọc sản phẩm linh động 
+    // Lọc sản phẩm linh động
     public function getFilteredProducts($colors = [], $priceRanges = [], $productTypes = [], $page = 1, $perPage = 12)
     {
         $query = "SELECT * FROM product WHERE 1=1";
@@ -152,6 +143,7 @@ class ProductModel
         $params = [];
         $types = "";
 
+        // Lọc màu sắc, khoảng giá, loại sản phẩm
         if (!empty($colors)) {
             $colorConditions = [];
             foreach ($colors as $color) {
@@ -240,4 +232,102 @@ class ProductModel
             'total_pages' => $totalPages
         ];
     }
+
+    // Các phương thức static từ nhánh origin/Vu
+    public static function getAll() {
+        $db = new DB();
+        return $db->table('product')->get();
+    }
+
+    public static function getById($id) {
+        $db = new DB();
+        return $db->table('product')->where('id', '=', $id)->first();
+    }
+
+    public static function update($id, $data) {
+        $db = new DB();
+        $db->table('product')->where('id', '=', $id)->update($data);
+    }
+
+    public static function delete($id) {
+        $db = new DB();
+        $db->table('product')->where('id', '=', $id)->delete();
+    }
+
+    public static function insert($data) {
+        $sql = "INSERT INTO product (name, price, image, category) 
+                VALUES (:name, :price, :image, :category)";
+        $params = [
+            ':name' => $data['name'],
+            ':price' => $data['price'],
+            ':image' => $data['image'],
+            ':category' => $data['category']
+        ];
+        return (new DB())->query($sql, $params);
+    }
+
+    public static function countAll() {
+        global $db_config;
+        $conn = Connection::getInstance($db_config); // dùng lại đúng hệ thống của bạn
+        $sql = "SELECT COUNT(*) AS total FROM product";
+        $result = $conn->query($sql);
+        $row = $result->fetch_assoc();
+        return $row['total'] ?? 0;
+    }
+
+    public static function getFiltered($category_id = null, $keyword = '', $min_price = null, $max_price = null, $limit = 10, $offset = 0) {
+        $db = new DB();
+        $sql = "SELECT p.*, c.name AS category_name
+                FROM product p
+                LEFT JOIN category c ON p.category_id = c.id
+                WHERE 1";
+    
+        if ($category_id) {
+            $sql .= " AND p.category_id = " . intval($category_id);
+        }
+    
+        if (!empty($keyword)) {
+            $kw = $db->escape("%$keyword%");
+            $sql .= " AND p.name LIKE '$kw'";
+        }
+    
+        if ($min_price !== null) {
+            $sql .= " AND p.price >= " . floatval($min_price);
+        }
+    
+        if ($max_price !== null) {
+            $sql .= " AND p.price <= " . floatval($max_price);
+        }
+    
+        $sql .= " ORDER BY p.created_at DESC LIMIT $limit OFFSET $offset";
+    
+        return $db->query($sql);
+    }
+
+    public static function countFiltered($category_id = null, $keyword = '', $min_price = null, $max_price = null) {
+        $db = new DB();
+        $sql = "SELECT COUNT(*) as total FROM product WHERE 1";
+    
+        if ($category_id) {
+            $sql .= " AND category_id = " . intval($category_id);
+        }
+    
+        if (!empty($keyword)) {
+            $kw = $db->escape("%$keyword%");
+            $sql .= " AND name LIKE '$kw'";
+        }
+    
+        if ($min_price !== null) {
+            $sql .= " AND price >= " . floatval($min_price);
+        }
+    
+        if ($max_price !== null) {
+            $sql .= " AND price <= " . floatval($max_price);
+        }
+    
+        $result = $db->query($sql);
+        return $result[0]['total'] ?? 0;
+    }
 }
+
+?>

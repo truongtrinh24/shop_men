@@ -10,7 +10,7 @@
     <?php if (isset($sub_content['error'])): ?>
         <p class="text-center text-danger"><?php echo htmlspecialchars($sub_content['error']); ?></p>
     <?php endif; ?>
-    <form class="mt-4" method="POST" action="/shop/login">
+    <form class="mt-4" method="POST" action="<?= _WEB_ROOT ?>/login">
         <div class="form-group">
             <label for="email">Email *</label>
             <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>

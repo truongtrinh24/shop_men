@@ -76,7 +76,7 @@ class App{
         //Xử lý controller
         if (!empty($urlArr[0])){
 
-            $this->__controller = ucfirst($urlArr[0]);
+            $this->__controller = $urlArr[0];
         }else{
             $this->__controller = ucfirst($this->__controller);
         }
