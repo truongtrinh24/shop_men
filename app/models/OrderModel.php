@@ -7,8 +7,111 @@ class OrderModel {
         global $db_config;
         $this->conn = Connection::getInstance($db_config);
     }
+    public static function getAll() {
+        global $db_config;
+        $conn = Connection::getInstance($db_config);
+    
+        $sql = "SELECT 
+                    orders.id, 
+                    orders.account_id, 
+                    orders.total_price, 
+                    orders.status_order_id, 
+                    orders.shipping_status_id, 
+                    orders.created_at, 
+                    orders.discount_id, 
+                    orders.employee_id, 
+                    customer.customer_name 
+                FROM 
+                    orders
+                JOIN 
+                    account ON orders.account_id = account.account_id
+                JOIN 
+                    customer ON account.account_id = customer.account_id";
+    
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->get_result();
+    
+        $orders = [];
+        while ($row = $result->fetch_assoc()) {
+            $orders[] = $row;
+        }
+    
+        return $orders;
+    }
+    public static function getOrderDetails($order_id)
+    {
+        global $db_config;
+        $conn = Connection::getInstance($db_config);
+        
+        // Truy vấn chi tiết đơn hàng từ bảng order_details
+        $query = "SELECT od.id AS order_detail_id, 
+            od.order_id, 
+            p.name AS product_name, 
+            p.price AS product_price, 
+            od.quantity AS order_quantity, 
+            p.product_image, 
+            p.description AS product_description
+        FROM order_details od
+        JOIN product p ON od.product_id = p.id
+        WHERE od.order_id = ?
+        ";
+        
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param('i', $order_id);
+        $stmt->execute();
+        
+        // Lấy kết quả
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+    public static function getTopCustomersByDateRange($startDate, $endDate)
+    {
 
-    public function getAllOrders($account_id) {
+        global $db_config;
+        $conn = Connection::getInstance($db_config);
+    
+        $sql = "
+            SELECT 
+                customer.customer_name, 
+                SUM(product.price * order_details.quantity) AS total_spent
+            FROM orders
+            INNER JOIN account ON orders.account_id = account.account_id
+            INNER JOIN customer ON account.account_id = customer.account_id
+            INNER JOIN order_details ON orders.id = order_details.order_id
+            INNER JOIN product ON order_details.product_id = product.id
+            WHERE orders.created_at BETWEEN ? AND ?
+            GROUP BY customer.customer_id
+            ORDER BY total_spent DESC
+            LIMIT 5
+        ";
+    
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("ss", $startDate, $endDate);
+        $stmt->execute();
+        $result = $stmt->get_result();
+    
+        $customers = [];
+        while ($row = $result->fetch_assoc()) {
+            $customers[] = $row;
+        }
+    
+        return $customers;
+    }
+    
+    
+    public static function getTopCustomers($startDate = null, $endDate = null)
+    {
+        if (!$startDate) $startDate = date('Y-m-d', strtotime('-30 days'));
+        if (!$endDate) $endDate = date('Y-m-d');
+    
+        return self::getTopCustomersByDateRange($startDate, $endDate);
+    }
+    
+
+    
+    
+    public  function getAllOrders($account_id) {
         $sql = 'SELECT * FROM orders WHERE account_id =?';
         $stmt = $this->conn->prepare($sql);
         $stmt->bind_param('i', $account_id);

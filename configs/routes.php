@@ -48,6 +48,8 @@ $routes['admin/customer'] = 'CustomerController';
 $routes['admin/dashboard'] = 'AdminController/dashboard';
 $routes['admin/product'] = 'Product_Admin/index';
 $routes['admin/orders'] = 'AdminController/orders';
+$routes['admin/order-detail/([0-9]+)'] = 'AdminController/orderDetail/$1';
+
 //phan quyen
 $routes['admin/role'] =  'RoleController';
 
@@ -56,7 +58,7 @@ $routes['admin/employee'] = 'Employee_Admin/index';
 $routes['admin/import'] = 'ImportController';
 //phần hóa đơn
 
-$routes['admin/order'] = 'OrderController/index';
+// $routes['admin/order'] = 'OrderController/index';
 $routes['xoa-hoa-don/([0-9]+)'] = 'OrderController/delete/$1';
 //$routes['them-hoa-don'] = 'OrderController/showAddForm';
 $routes['xu-ly-them-hoa-don'] = 'OrderController/add'; 
@@ -83,8 +85,8 @@ $routes['admin/products/store'] = 'AdminController@storeProduct';
 $routes['admin/products/edit/{id}'] = 'AdminController@editProduct';
 $routes['admin/products/update/{id}'] = 'AdminController@updateProduct';
 $routes['admin/products/delete/{id}'] = 'AdminController@deleteProduct';
-$routes['admin/orders/confirm/{id}'] = 'AdminController@confirmOrder';
-$routes['admin/orders/cancel/{id}'] = 'AdminController@cancelOrder';
+// $routes['admin/orders/confirm/{id}'] = 'AdminController@confirmOrder';
+// $routes['admin/orders/cancel/{id}'] = 'AdminController@cancelOrder';
 $routes['admin/users/lock/{id}'] = 'AdminController@lockUser';
 $routes['admin/users/unlock/{id}'] = 'AdminController@unlockUser';
 $routes['admin/categories'] = 'AdminController@categories';

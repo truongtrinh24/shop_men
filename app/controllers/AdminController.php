@@ -10,23 +10,35 @@ class AdminController extends Controller
     public function dashboard()
     {
         AuthMiddleware::handleStaffAndAdmin();
-
+    
+        // Lấy khoảng thời gian từ URL hoặc sử dụng mặc định (1 tháng trước đến hiện tại)
+        $startDate = $_GET['start_date'] ?? date('Y-m-d', strtotime('-1 month'));
+        $endDate = $_GET['end_date'] ?? date('Y-m-d');
+    
+        // Thống kê chung
         $stats = [
             'total_products' => ProductModel::countAll(),
             'total_orders' => OrderModel::countAll(),
             'total_customers' => Account::countByRole(3),
             'total_revenue' => OrderModel::getConfirmedRevenue()
         ];
-
-        $monthlyRevenue = OrderModel::getMonthlyRevenue(); // thêm mới
-
-        
+    
+        // Doanh thu theo tháng
+        $monthlyRevenue = OrderModel::getMonthlyRevenue();
+    
+        // Lấy danh sách 5 khách hàng mua nhiều nhất trong khoảng thời gian
+        $topCustomers = OrderModel::getTopCustomers($startDate, $endDate);
+    
+        // Truyền dữ liệu vào view
         $this->render('blocks/admin/dashboard', [
             'stats' => $stats,
-            'monthlyRevenue' => $monthlyRevenue
+            'monthlyRevenue' => $monthlyRevenue,
+            'topCustomers' => $topCustomers, // Truyền dữ liệu khách hàng vào view
+            'startDate' => $startDate,
+            'endDate' => $endDate
         ]);
     }
-
+    
     // Quản lý sản phẩm
     public function products()
     {
@@ -65,7 +77,16 @@ class AdminController extends Controller
         $orders = OrderModel::getAll();
         $this->render('blocks/admin/orders', ['orders' => $orders]);
     }
-
+    public function orderDetail($order_id)
+    {
+        // Lấy thông tin chi tiết đơn hàng từ bảng order_details
+        $orderDetails = OrderModel::getOrderDetails($order_id);
+    
+        // Truyền dữ liệu vào view để hiển thị
+        $data['orderDetails'] = $orderDetails;
+        $this->render('blocks/admin/order_detail', $data);
+    }
+    
     // Quản lý tài khoản khách hàng
     public function users()
     {

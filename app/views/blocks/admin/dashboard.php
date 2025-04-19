@@ -67,7 +67,7 @@
             </a>
           </li>
           <li class="mb-3">
-            <a href="/admin/orders" class="text-decoration-none d-flex align-items-center">
+            <a href="/shop/admin/orders" class="text-decoration-none d-flex align-items-center">
               📦 <span class="ms-2">Đơn hàng</span>
             </a>
           </li>
@@ -134,6 +134,38 @@
       <hr>
       <h4>📈 Doanh thu 12 tháng gần nhất</h4>
       <canvas id="revenueChart" height="120"></canvas>
+      <h4 class="mt-4">👑 5 Khách Hàng Mua Nhiều Nhất</h4>
+      <form method="get" class="mb-3 d-flex align-items-center gap-2">
+          <label for="start_date" class="fw-semibold">📅 Từ:</label>
+          <input type="date" name="start_date" class="form-control w-auto" value="<?= $startDate ?>">
+          <label for="end_date" class="fw-semibold">Đến:</label>
+          <input type="date" name="end_date" class="form-control w-auto" value="<?= $endDate ?>">
+          <button type="submit" class="btn btn-primary">Xem</button>
+      </form>
+
+      <table class="table table-bordered">
+          <thead>
+              <tr>
+                  <th>Khách hàng</th>
+                  <th>Tổng chi tiêu</th>
+              </tr>
+          </thead>
+          <tbody>
+              <?php if (!empty($topCustomers)): ?>
+                  <?php foreach ($topCustomers as $customer): ?>
+                      <tr>
+                          <td><?= htmlspecialchars($customer['customer_name']) ?></td>
+                          <td><?= number_format($customer['total_spent'], 0, ',', '.') ?> đ</td>
+                      </tr>
+                  <?php endforeach; ?>
+              <?php else: ?>
+                  <tr>
+                      <td colspan="2">Không có dữ liệu khách hàng.</td>
+                  </tr>
+              <?php endif; ?>
+          </tbody>
+      </table>
+
     </div>
   </div>
 

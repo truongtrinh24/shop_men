@@ -1,26 +1,32 @@
-<h2>📚 Quản lý danh mục sản phẩm</h2>
-<p><a href="/admin/categories/create" class="btn btn-success btn-sm">+ Thêm danh mục</a></p>
+<!-- app/views/blocks/admin/order_detail.php -->
+<h2>📋 Chi tiết đơn hàng</h2>
+<hr>
 
-<table class="table table-bordered">
-    <thead>
+<table class="table table-striped table-bordered">
+    <thead class="thead-dark">
         <tr>
             <th>ID</th>
-            <th>Tên danh mục</th>
-            <th>Ngày tạo</th>
-            <th>Hành động</th>
+            <th>Sản phẩm</th>
+            <th>Số lượng</th>
+            <th>Giá</th>
+            <th>Tổng tiền</th>
         </tr>
     </thead>
     <tbody>
-        <?php foreach ($categories as $cate): ?>
+        <?php if (!empty($orderDetails)): ?>
+            <?php foreach ($orderDetails as $detail): ?>
+                <tr>
+                    <td><?= isset($detail['order_detail_id']) ? $detail['order_detail_id'] : 'N/A' ?></td>
+                    <td><?= isset($detail['product_name']) ? $detail['product_name'] : 'N/A' ?></td>
+                    <td><?= isset($detail['order_quantity']) ? $detail['order_quantity'] : 'N/A' ?></td>
+                    <td><?= isset($detail['product_price']) ? number_format($detail['product_price']) . ' đ' : 'N/A' ?></td>
+                    <td><?= isset($detail['product_price'], $detail['order_quantity']) ? number_format($detail['product_price'] * $detail['order_quantity']) . ' đ' : 'N/A' ?></td>
+                </tr>
+            <?php endforeach; ?>
+        <?php else: ?>
             <tr>
-                <td><?= $cate['id'] ?></td>
-                <td><?= $cate['name'] ?></td>
-                <td><?= $cate['created_at'] ?></td>
-                <td>
-                    <a href="/admin/categories/edit/<?= $cate['id'] ?>" class="btn btn-sm btn-primary">Sửa</a>
-                    <a href="/admin/categories/delete/<?= $cate['id'] ?>" onclick="return confirm('Xoá danh mục này?')" class="btn btn-sm btn-danger">Xoá</a>
-                </td>
+                <td colspan="5">Không có chi tiết đơn hàng.</td>
             </tr>
-        <?php endforeach ?>
+        <?php endif; ?>
     </tbody>
 </table>
