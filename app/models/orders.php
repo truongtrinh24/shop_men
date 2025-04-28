@@ -7,8 +7,8 @@ class Orders {
         $this->conn = Connection::getInstance($db_config);
     }
 
-    // Lấy chi tiết đơn hàng theo order_id
-    public function getDetailOrderByOrderId($order_id) {
+    // 1. Lấy chi tiết đơn hàng theo order_id (Dùng trong viewDetailOrder())
+    public function viewDetailOrder($order_id) {
         $sql = "SELECT id, order_id, product_id, quantity, price
                 FROM detail_order
                 WHERE order_id = ?";
@@ -29,52 +29,23 @@ class Orders {
         return $data;
     }
 
-    // Thêm sản phẩm vào chi tiết đơn hàng
-    public function addDetailOrder($order_id, $product_id, $quantity, $price) {
-        $sql = "INSERT INTO detail_order (order_id, product_id, quantity, price)
-                VALUES (?, ?, ?, ?)";
+    // 2. Hủy đơn hàng (Dùng trong cancelOrder($order_id))
+    public function cancelOrder($order_id) {
+        // Update bảng orders: set trạng thái thành '3' (Đã hủy)
+        $sql = "UPDATE orders SET status_order_id = 3 WHERE order_id = ?";
         $stmt = $this->conn->prepare($sql);
         if (!$stmt) {
             die('Prepare failed: ' . $this->conn->error);
         }
-        $stmt->bind_param('iiid', $order_id, $product_id, $quantity, $price);
+        $stmt->bind_param('i', $order_id);
 
-        $success = $stmt->execute();
-        $stmt->close();
-
-        return $success;
-    }
-
-    // Xóa chi tiết đơn hàng theo id
-    public function deleteDetailOrder($id) {
-        $sql = "DELETE FROM detail_order WHERE id = ?";
-        $stmt = $this->conn->prepare($sql);
-        if (!$stmt) {
-            die('Prepare failed: ' . $this->conn->error);
+        if (!$stmt->execute()) {
+            echo "Lỗi khi hủy đơn hàng: " . $stmt->error;
+            return false;
         }
-        $stmt->bind_param('i', $id);
 
-        $success = $stmt->execute();
         $stmt->close();
-
-        return $success;
-    }
-
-    // Cập nhật số lượng hoặc giá trong chi tiết đơn hàng
-    public function updateDetailOrder($id, $quantity, $price) {
-        $sql = "UPDATE detail_order
-                SET quantity = ?, price = ?
-                WHERE id = ?";
-        $stmt = $this->conn->prepare($sql);
-        if (!$stmt) {
-            die('Prepare failed: ' . $this->conn->error);
-        }
-        $stmt->bind_param('idi', $quantity, $price, $id);
-
-        $success = $stmt->execute();
-        $stmt->close();
-
-        return $success;
+        return true;
     }
 }
 ?>
