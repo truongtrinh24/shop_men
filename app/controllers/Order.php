@@ -46,7 +46,7 @@ class Order extends Controller {
     }
 
     public function viewDetailOrder() {
-        $orders = $this->model("orders");
+        $orders = $this->model("OrderModel");
         $order_id = $_GET['orderId'];
         $dataDetailOrder = $orders->getDetailOrderByOrderId($order_id);
         header('Content-Type: application/json');
@@ -54,7 +54,7 @@ class Order extends Controller {
     }
 
     public function cancelOrder($order_id) {
-        $orders = $this->model("orders");
+        $orders = $this->model("OrderModel");
         $orders->cancelOrder($order_id);
         $_SESSION['success_message'] = "Đơn hàng đã được hủy thành công!";
         $response = new Response();
