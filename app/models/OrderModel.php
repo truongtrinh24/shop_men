@@ -28,7 +28,7 @@ class OrderModel {
         $now = new DateTime();
         $date_buy = $now->format('Y-m-d H:i:s');
     
-        $sql = 'INSERT INTO  orders (account_id, status_order_id, total, date_buy) VALUES (?, ?, ?, ?)';
+        $sql = 'INSERT INTO  orders (account_id, status_order_id, total_price, created_at) VALUES (?, ?, ?, ?)';
         $stmt = $this->conn->prepare($sql);
         if ($stmt === false) {
             echo "Prepare statement failed: " . $this->conn->error;
@@ -50,7 +50,7 @@ class OrderModel {
     
 
     public function placeOrderWithItems($order_id, $product_seri) {
-        $sql = 'INSERT INTO  detail_order (order_id, product_seri) VALUES (?, ?)';
+        $sql = 'INSERT INTO  order_details (order_id, product_id) VALUES (?, ?)';
         $stmt = $this->conn->prepare($sql);
         $stmt->bind_param('is', $order_id, $product_seri);
 
@@ -63,10 +63,10 @@ class OrderModel {
     }
 
     public function getProductSeriByProductId($productId, $quantity) {
-        $sql = 'SELECT product_seri 
-        FROM product_seri 
-        WHERE product_id = ? AND status = 1 
-        ORDER BY product_seri
+        $sql = 'SELECT category_id
+        FROM product
+        WHERE product_id = ? 
+        ORDER BY category_id
         LIMIT ?;
         ';
         $stmt = $this->conn->prepare($sql);
@@ -83,10 +83,9 @@ class OrderModel {
 
     public function getDetailOrderByOrderId($order_id) {
         $sql = "SELECT *
-        FROM detail_order
-        JOIN product_seri ON detail_order.product_seri = product_seri.product_seri
-        JOIN product ON product_seri.product_id = product.product_id
-        WHERE detail_order.order_id = ?";
+        FROM order_details
+        JOIN product_id ON order_details.product_id = product.id
+        WHERE order_details.order_id = ?";
         $stmt = $this->conn->prepare($sql);
         $stmt->bind_param('i', $order_id);
         $stmt->execute();
@@ -112,7 +111,7 @@ class OrderModel {
     }
 
     public function cancelOrder($order_id) {
-        $sql = 'UPDATE orders SET status_order_id = 3 WHERE order_id =?';
+        $sql = 'UPDATE orders SET status_order_id = 3 WHERE id =?';
         $stmt = $this->conn->prepare($sql);
         $stmt->bind_param('i', $order_id);
 
