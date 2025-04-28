@@ -10,7 +10,7 @@ class Orders {
     // 1. Lấy chi tiết đơn hàng theo order_id (Dùng trong viewDetailOrder())
     public function viewDetailOrder($order_id) {
         $sql = "SELECT id, order_id, product_id, quantity, price
-                FROM detail_order
+                FROM order_details
                 WHERE order_id = ?";
         $stmt = $this->conn->prepare($sql);
         if (!$stmt) {
@@ -32,7 +32,7 @@ class Orders {
     // 2. Hủy đơn hàng (Dùng trong cancelOrder($order_id))
     public function cancelOrder($order_id) {
         // Update bảng orders: set trạng thái thành '3' (Đã hủy)
-        $sql = "UPDATE orders SET status_order_id = 3 WHERE order_id = ?";
+        $sql = "UPDATE  SET status_order_id = 3 WHERE id = ?";
         $stmt = $this->conn->prepare($sql);
         if (!$stmt) {
             die('Prepare failed: ' . $this->conn->error);
