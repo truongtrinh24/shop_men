@@ -8,7 +8,7 @@ class Orders {
     }
 
     // 1. Lấy chi tiết đơn hàng theo order_id (Dùng trong viewDetailOrder())
-    public function viewDetailOrder($order_id) {
+    public function  getDetailOrderByOrderId($order_id) {
         $sql = "SELECT id, order_id, product_id, quantity, price
                 FROM order_details
                 WHERE order_id = ?";
