@@ -82,11 +82,11 @@ class OrderModel {
     }
 
     public function getDetailOrderByOrderId($order_id) {
-        $sql = "SELECT *
-        FROM order_details
-        JOIN product_id ON order_details.product_id = product.id
-        WHERE order_details.order_id = ?";
-        $stmt = $this->conn->prepare($sql);
+       $sql = "SELECT *
+                FROM order_details
+                JOIN product ON order_details.product_id = product.product_id
+                WHERE order_id = ?";
+       $stmt = $this->conn->prepare($sql);
         $stmt->bind_param('i', $order_id);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -96,6 +96,7 @@ class OrderModel {
         }
         $stmt->close();
         return $data;
+            
     }
 
     public function updateStatusProductSeries($product_seri) {
